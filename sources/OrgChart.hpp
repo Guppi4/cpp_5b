@@ -14,23 +14,23 @@ namespace ariel
 
     class OrgChart
     {
-    
+
         struct TNode
         {
             string value;
             vector<TNode *> subs;
             TNode(string val) : value(val) {}
         };
-         TNode *root;
+        TNode *root;
 
-        public:
-        
+    public:
+        int sizeofTree;
         string root_name;
-        OrgChart() : root(NULL) {}
-        ~OrgChart(); 
-        vector<TNode*> it_preorder();
-        TNode* find_root(string m);
-        
+        OrgChart() : root(NULL), sizeofTree(0) {}
+        ~OrgChart();
+        vector<TNode *> it_preorder();
+        TNode *find_root(string m);
+
         OrgChart &add_root(const string root);
         OrgChart &add_sub(string root, string sub);
         vector<string>::iterator begin_level_order(); // level order
@@ -42,6 +42,8 @@ namespace ariel
         vector<string>::iterator begin();
         vector<string>::iterator end();
         friend ostream &operator<<(ostream &out, const OrgChart &p);
-        TNode* getroot();
+        TNode *getroot();
+        void printNTree();
+        void printNTree_help(TNode *x, vector<bool> flag, int depth, bool isLast);
     };
 }
