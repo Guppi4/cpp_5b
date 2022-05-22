@@ -64,7 +64,7 @@ namespace ariel
                     iterator(TNode* ptr):pointer_to_node(ptr){}  
                     
                     string  operator*() const {return pointer_to_node->value;}
-		            string *operator->() const {return &(pointer_to_node->value);}
+		            string *operator->() const {return &(pointer_to_node->value);}//tyu
                     void level_order(TNode* root);
                     void Preoder(TNode* root);
                     void level_order_reverse(TNode* root);
