@@ -185,30 +185,26 @@ void OrgChart::iterator::Preoder(TNode *root)
     this->pointer_to_node = this->tq.front();
 }
 
-void OrgChart::iterator::level_order_reverse(TNode *root)
+void OrgChart::iterator::level_order(TNode *root)
 {
-    vector<vector<TNode*>> ans;
-    if (!root){
-        throw runtime_error ("Null");
+    // cout <<"Priv"<<endl;
+    vector<vector<TNode *>> ans;
+    if (!root)
+    {
+        throw runtime_error("Null");
     }
 
-      
-        queue<TNode *> main_queue;
+    queue<TNode *> main_queue;
 
-   
     main_queue.push(root);
 
-    
-    vector<TNode*> temp;
+    vector<TNode *> temp;
 
-   
     while (!main_queue.empty())
     {
 
-       
         int n = main_queue.size();
 
-       
         for (size_t i = 0; i < n; i++)
         {
             TNode *cur = main_queue.front();
@@ -220,18 +216,87 @@ void OrgChart::iterator::level_order_reverse(TNode *root)
         ans.push_back(temp);
         temp.clear();
     }
-    for (auto v : ans) {
-        for (TNode* x : v){
+    for (auto v : ans)
+    {
+        for (TNode *x : v)
+        {
             this->tq.push(x);
-            //cout << x << " ";  
+            // cout << x->value << " ";
         }
-          
-       // cout << endl;
+
+        // cout << endl;
     }
     this->pointer_to_node = this->tq.front();
-   
 }
 
-void OrgChart::iterator::level_order(TNode *root)
+void OrgChart::iterator::level_order_reverse(TNode *root)
 {
+    // cout <<"Priv"<<endl;
+    vector<vector<TNode *>> ans;
+    if (!root)
+    {
+        throw runtime_error("Null");
+    }
+
+    queue<TNode *> main_queue;
+
+    main_queue.push(root);
+
+    vector<TNode *> temp;
+
+    while (!main_queue.empty())
+    {
+
+        int n = main_queue.size();
+
+        for (size_t i = 0; i < n; i++)
+        {
+            TNode *cur = main_queue.front();
+            main_queue.pop();
+            temp.push_back(cur);
+            for (auto u : cur->subs)
+                main_queue.push(u);
+        }
+        ans.push_back(temp);
+        temp.clear();
+    }
+  
+    stack< queue<TNode *>> stack;
+      
+    for (auto v : ans)
+    {
+         queue<TNode *> y;
+        for (TNode *x : v)
+        {
+       
+           y.push(x);
+            // cout << x->value << " ";
+        }
+      //cout<<y.size()<<endl;
+       stack.push(y);
+        // cout << endl;
+    }
+     //cout << "fdghg"<<endl;
+   
+    while (!stack.empty())
+    {
+      
+     queue<TNode *> y = stack.top();
+          //cout<<y.size()<<endl;
+       // stack.pop();
+       // cout << "fdghg"<<endl;
+       
+        while (!y.empty())
+    {
+       
+        TNode *i= y.front();
+        //cout<<i->value<<endl;
+        this->tq.push( i);
+        y.pop();
+    }
+         stack.pop();
+        //this->tq.push(n);
+    }
+
+    this->pointer_to_node = this->tq.front();
 }

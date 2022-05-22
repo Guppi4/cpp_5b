@@ -53,7 +53,9 @@ namespace ariel
                    
                     if (flag == level_order_flag)//flags to iterators
                     {
+                        
                         level_order(pointer_to_node);
+                         // cout <<"Priv"<<endl;
                     }
                     if (flag == preorder_flag)
                     {
@@ -62,6 +64,7 @@ namespace ariel
                     }
                     if (flag == level_order_reverse_flag)
                     {
+                        //cout <<"Priv"<<endl;
                         level_order_reverse(pointer_to_node);
                     }
                      tq.push(nullptr);
