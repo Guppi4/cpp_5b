@@ -49,13 +49,10 @@ OrgChart &OrgChart::add_sub(string root, string sub)
     return *this;
 }
 
-ostream &ariel::operator<<(ostream &out, const OrgChart &p)
-{
-    return out;
-}
+
 OrgChart::TNode *OrgChart::getroot()
 {
-    return root;
+    return this->root;
 }
 vector<OrgChart::TNode *> OrgChart::it_preorder()
 {
@@ -101,54 +98,60 @@ OrgChart::TNode *OrgChart::find_root(string m)
 
     return t;
 }
-void OrgChart::printNTree()
+string  OrgChart::printNTree()
 {
     TNode *x = this->root;
     unsigned long size = (unsigned long)this->sizeofTree;
     vector<bool> flag(size, true);
-    printNTree_help(x, flag, 0, false);
+    
+  return printNTree_help(x ,flag, 0, false);
 }
-void OrgChart::printNTree_help(TNode *x, vector<bool> flag, int depth = 0, bool isLast = false)
+string OrgChart::printNTree_help(TNode *x, vector<bool> flag, int depth = 0, bool isLast = false)
 
 {
-
+    //
     if (x == NULL)
-        return;
+        return "";
 
     // Loop to print
-
+//this->root_name="";
     for (size_t i = 1; i < depth; ++i)
     {
 
         if (flag[i] == true)
         {
-            cout << "| "
-                 << " "
-                 << " "
-                 << " ";
+            this->root_name+= "| ";
+                 this->root_name+=" ";
+                  this->root_name+= " ";
+                 this->root_name+= " ";
         }
 
         else
         {
-            cout << " "
-                 << " "
-                 << " "
-                 << " ";
+             this->root_name+= " ";
+                 this->root_name+=" ";
+                  this->root_name+=" ";
+                 this->root_name+= " ";
         }
     }
 
-    if (depth == 0)
-        cout << x->value << '\n';
-
+    if (depth == 0){
+        this->root_name+=x->value ; 
+        this->root_name+= '\n';
+    }
     else if (isLast)
     {
-        cout << "+--- " << x->value << '\n';
+         this->root_name+= "+--- " ; 
+          this->root_name+=x->value  ;
+           this->root_name+='\n';
 
         flag[(size_t)depth] = false;
     }
     else
     {
-        cout << "+--- " << x->value << '\n';
+        this->root_name+= "+--- " ; 
+          this->root_name+=x->value  ; 
+          this->root_name+= '\n';
     }
 
     int it = 0;
@@ -156,8 +159,11 @@ void OrgChart::printNTree_help(TNode *x, vector<bool> flag, int depth = 0, bool 
 
         // recursive call
 
-        printNTree_help(*i, flag, depth + 1, it == (x->subs.size()) - 1);
+        
+     this->root_name=printNTree_help(*i,flag, depth + 1, it == (x->subs.size()) - 1);
     flag[(size_t)depth] = true;
+
+  return this->root_name;
 }
 void OrgChart::iterator::Preoder(TNode *root)
 {

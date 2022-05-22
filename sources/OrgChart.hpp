@@ -27,18 +27,31 @@ namespace ariel
     public:
         int sizeofTree;
         string root_name;
-        OrgChart() : root(NULL), sizeofTree(0) {}
+        OrgChart() : root(NULL), sizeofTree(0),root_name("") {}
         ~OrgChart();
         vector<TNode *> it_preorder();
         TNode *find_root(string m);
 
         OrgChart &add_root(const string root);
         OrgChart &add_sub(string root, string sub);
-       
-        friend ostream &operator<<(ostream &out, const OrgChart &p);
+       string  printNTree_help(TNode *x, vector<bool> flag, int depth, bool isLast);
+       friend ostream &operator<<(ostream &out,  OrgChart &p)
+        {
+            TNode *x = p.getroot();
+            unsigned long size = (unsigned long)p.sizeofTree;
+            vector<bool> flag(size, true);
+            string s=p.printNTree_help(x,flag, 0, false);
+            out<<s;
+            p.root_name="";
+            ///
+            //cout << s<<endl;
+            return out;
+        }
+
         TNode *getroot();
-        void printNTree();
-        void printNTree_help(TNode *x, vector<bool> flag, int depth, bool isLast);
+        string printNTree();
+        
+
         class iterator
         {
         private:
@@ -50,27 +63,27 @@ namespace ariel
             {
                 if (pointer_to_node != nullptr)
                 {
-                   
-                    if (flag == level_order_flag)//flags to iterators
+
+                    if (flag == level_order_flag) // flags to iterators
                     {
-                        
+
                         level_order(pointer_to_node);
-                         // cout <<"Priv"<<endl;
+                        // cout <<"Priv"<<endl;
                     }
                     if (flag == preorder_flag)
                     {
-                        
+
                         Preoder(pointer_to_node);
                     }
                     if (flag == level_order_reverse_flag)
                     {
-                        //cout <<"Priv"<<endl;
+                        // cout <<"Priv"<<endl;
                         level_order_reverse(pointer_to_node);
                     }
-                     tq.push(nullptr);
+                    tq.push(nullptr);
                 }
             }
-            
+
             iterator(TNode *ptr) : pointer_to_node(ptr) {}
 
             string operator*() const { return pointer_to_node->value; }
@@ -104,6 +117,5 @@ namespace ariel
         iterator reverse_order() { return iterator(nullptr); }
         iterator begin() { return iterator(level_order_flag, root); }
         iterator end() { return iterator(nullptr); }
-   
     };
 }
