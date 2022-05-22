@@ -1,0 +1,8 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/kirill/Desktop/CPP/cpp_5b'
+clang++-9  -std=c++2a -Werror -Wsign-conversion -Isources --compile Demo.cpp -o Demo.o
+clang++-9  -std=c++2a -Werror -Wsign-conversion -Isources --compile sources/OrgChart.cpp -o objects/OrgChart.o
+clang++-9  -std=c++2a -Werror -Wsign-conversion -Isources Demo.o objects/OrgChart.o -o demo
+./demo
+make: Leaving directory '/home/kirill/Desktop/CPP/cpp_5b'
+ 
