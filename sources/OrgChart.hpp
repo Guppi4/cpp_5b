@@ -3,6 +3,7 @@
 #include <vector>
 #include <iterator>
 #include <map>
+#include <queue>
 using namespace std;
 
 namespace ariel
@@ -33,57 +34,73 @@ namespace ariel
 
         OrgChart &add_root(const string root);
         OrgChart &add_sub(string root, string sub);
-        vector<string>::iterator begin_level_order(); // level order
-        vector<string>::iterator end_level_order();
-        vector<string>::iterator begin_reverse_order(); // level order reverse
-        vector<string>::iterator reverse_order();
-        vector<string>::iterator begin_preorder(); // preorder
-        vector<string>::iterator end_preorder();
-        vector<string>::iterator begin();
-        vector<string>::iterator end();
+       
         friend ostream &operator<<(ostream &out, const OrgChart &p);
         TNode *getroot();
         void printNTree();
         void printNTree_help(TNode *x, vector<bool> flag, int depth, bool isLast);
-           class iterator{
-                private:
-		            TNode* pointer_to_node;
-                    queue<TNode*> tq;
+        class iterator
+        {
+        private:
+            TNode *pointer_to_node;
+            queue<TNode *> tq;
 
-                public:  
-                    iterator(unsigned int flag,TNode* ptr): pointer_to_node(ptr){
-                        if(pointer_to_node != nullptr){
-                            tq.push(nullptr);
-                            if(flag == level_order_flag){level_order(pointer_to_node);}
-                            if(flag == preorder_flag){Preoder(pointer_to_node);}
-                            if(flag == level_order_reverse_flag){level_order_reverse(pointer_to_node);}
-                           
-                        }
-   
+        public:
+            iterator(unsigned int flag, TNode *ptr) : pointer_to_node(ptr)
+            {
+                if (pointer_to_node != nullptr)
+                {
+                   
+                    if (flag == level_order_flag)//flags to iterators
+                    {
+                        level_order(pointer_to_node);
                     }
-                    iterator(TNode* ptr):pointer_to_node(ptr){}  
-                    
-                    string  operator*() const {return pointer_to_node->value;}
-		            string *operator->() const {return &(pointer_to_node->value);}//tyu
-                    void level_order(TNode* root);
-                    void Preoder(TNode* root);
-                    void level_order_reverse(TNode* root);
-                    
-		            iterator& operator++() {
-                        tq.pop();
-			            pointer_to_node = tq.front();
-			            return *this;
-		            }
-		            iterator operator++(int) {
-			            iterator tmp = *this;
-                        tq.pop();
-			            pointer_to_node = tq.front();
-			            return tmp;
-		            }
+                    if (flag == preorder_flag)
+                    {
+                        
+                        Preoder(pointer_to_node);
+                    }
+                    if (flag == level_order_reverse_flag)
+                    {
+                        level_order_reverse(pointer_to_node);
+                    }
+                     tq.push(nullptr);
+                }
+            }
+            
+            iterator(TNode *ptr) : pointer_to_node(ptr) {}
 
-		            bool operator==(const iterator& rhs) const {return pointer_to_node == rhs.pointer_to_node;}
-		            bool operator!=(const iterator& rhs) const {return pointer_to_node != rhs.pointer_to_node;}
-            };
-    
+            string operator*() const { return pointer_to_node->value; }
+            string *operator->() const { return &(pointer_to_node->value); } // tyu
+            void level_order(TNode *root);
+            void Preoder(TNode *root);
+            void level_order_reverse(TNode *root);
+
+            iterator &operator++()
+            {
+                tq.pop();
+                pointer_to_node = tq.front();
+                return *this;
+            }
+            iterator operator++(int)
+            {
+                iterator tmp = *this;
+                tq.pop();
+                pointer_to_node = tq.front();
+                return tmp;
+            }
+
+            bool operator==(const iterator &rhs) const { return pointer_to_node == rhs.pointer_to_node; }
+            bool operator!=(const iterator &rhs) const { return pointer_to_node != rhs.pointer_to_node; }
+        };
+        iterator begin_level_order() { return iterator(level_order_flag, root); }
+        iterator end_level_order() { return iterator(nullptr); }
+        iterator begin_preorder() { return iterator(preorder_flag, root); }
+        iterator end_preorder() { return iterator(nullptr); }
+        iterator begin_reverse_order() { return iterator(level_order_reverse_flag, root); }
+        iterator reverse_order() { return iterator(nullptr); }
+        iterator begin() { return iterator(level_order_flag, root); }
+        iterator end() { return iterator(nullptr); }
+   
     };
 }

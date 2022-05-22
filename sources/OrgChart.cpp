@@ -49,45 +49,6 @@ OrgChart &OrgChart::add_sub(string root, string sub)
     return *this;
 }
 
-vector<string>::iterator OrgChart::begin_level_order()
-{
-
-    return return_vec();
-}
-
-vector<string>::iterator OrgChart::end_level_order()
-{
-    return return_vec();
-}
-
-vector<string>::iterator OrgChart::begin_reverse_order()
-{
-    return return_vec();
-}
-
-vector<string>::iterator OrgChart::reverse_order()
-{
-    return return_vec();
-}
-
-vector<string>::iterator OrgChart::begin_preorder()
-{
-    return return_vec();
-}
-
-vector<string>::iterator OrgChart::end_preorder()
-{
-    return return_vec();
-}
-
-vector<string>::iterator OrgChart::begin()
-{
-    return return_vec();
-}
-vector<string>::iterator OrgChart::end()
-{
-    return return_vec();
-}
 ostream &ariel::operator<<(ostream &out, const OrgChart &p)
 {
     return out;
@@ -197,4 +158,80 @@ void OrgChart::printNTree_help(TNode *x, vector<bool> flag, int depth = 0, bool 
 
         printNTree_help(*i, flag, depth + 1, it == (x->subs.size()) - 1);
     flag[(size_t)depth] = true;
+}
+void OrgChart::iterator::Preoder(TNode *root)
+{
+    stack<TNode *> Stack;
+
+    // vector<TNode*> Preorder;
+
+    Stack.push(root);
+
+    while (!Stack.empty())
+    {
+        TNode *temp = Stack.top();
+        Stack.pop();
+        this->tq.push(temp);
+        // Push all of the child
+        // cout << temp->subs.size()<<endl;
+
+        for (size_t i = temp->subs.size(); i > 0; i--)
+        {
+            // cout <<"ups" <<endl;
+            Stack.push(temp->subs[i - 1]);
+        }
+    }
+
+    this->pointer_to_node = this->tq.front();
+}
+
+void OrgChart::iterator::level_order_reverse(TNode *root)
+{
+    vector<vector<TNode*>> ans;
+    if (!root){
+        throw runtime_error ("Null");
+    }
+
+      
+        queue<TNode *> main_queue;
+
+   
+    main_queue.push(root);
+
+    
+    vector<TNode*> temp;
+
+   
+    while (!main_queue.empty())
+    {
+
+       
+        int n = main_queue.size();
+
+       
+        for (size_t i = 0; i < n; i++)
+        {
+            TNode *cur = main_queue.front();
+            main_queue.pop();
+            temp.push_back(cur);
+            for (auto u : cur->subs)
+                main_queue.push(u);
+        }
+        ans.push_back(temp);
+        temp.clear();
+    }
+    for (auto v : ans) {
+        for (TNode* x : v){
+            this->tq.push(x);
+            //cout << x << " ";  
+        }
+          
+       // cout << endl;
+    }
+    this->pointer_to_node = this->tq.front();
+   
+}
+
+void OrgChart::iterator::level_order(TNode *root)
+{
 }
