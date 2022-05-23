@@ -9,9 +9,7 @@
 using namespace std;
 using namespace ariel;
 
-OrgChart::~OrgChart()
-{
-}
+
 vector<string>::iterator return_vec() // return vector of iterator
 {
     vector<string>::iterator vec;
@@ -57,10 +55,13 @@ OrgChart::TNode *OrgChart::getroot()
 vector<OrgChart::TNode *> OrgChart::it_preorder()
 {
     stack<TNode *> Stack;
-
+   
     vector<TNode *> Preorders_nodes; // visited nodes
-
+   if(getroot()==nullptr){
+     throw std::invalid_argument{"Not exist"};
+   }
     Stack.push(getroot());
+    
     // cout << this->sizeofTree << endl;
     while (!Stack.empty())
     {

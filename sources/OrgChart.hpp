@@ -27,30 +27,46 @@ namespace ariel
     public:
         int sizeofTree;
         string root_name;
-        OrgChart() : root(NULL), sizeofTree(0),root_name("") {}
-        ~OrgChart();
+        OrgChart() : root(NULL), sizeofTree(0), root_name("") {}
+        ~OrgChart()
+        {
+            delet_Orgchart(root);
+        }
         vector<TNode *> it_preorder();
         TNode *find_root(string m);
-
+        void delet_Orgchart(TNode *root)
+        {
+           OrgChart *organization=this;
+            if (root == nullptr)
+            {
+                return;
+            }
+            vector<TNode*>p=it_preorder();
+             for (vector<TNode*>::iterator it = p.begin() ; it != p.end(); ++it){
+                delete *it;
+             
+             }
+            root=nullptr;
+            
+        }
         OrgChart &add_root(const string root);
         OrgChart &add_sub(string root, string sub);
-       string  printNTree_help(TNode *x, vector<bool> flag, int depth, bool isLast);
-       friend ostream &operator<<(ostream &out,  OrgChart &p)
+        string printNTree_help(TNode *x, vector<bool> flag, int depth, bool isLast);
+        friend ostream &operator<<(ostream &out, OrgChart &p)
         {
             TNode *x = p.getroot();
             unsigned long size = (unsigned long)p.sizeofTree;
             vector<bool> flag(size, true);
-            string s=p.printNTree_help(x,flag, 0, false);
-            out<<s;
-            p.root_name="";
+            string s = p.printNTree_help(x, flag, 0, false);
+            out << s;
+            p.root_name = "";
             ///
-            //cout << s<<endl;
+            // cout << s<<endl;
             return out;
         }
 
         TNode *getroot();
         string printNTree();
-        
 
         class iterator
         {
@@ -61,6 +77,10 @@ namespace ariel
         public:
             iterator(unsigned int flag, TNode *ptr) : pointer_to_node(ptr)
             {
+                if (ptr == nullptr)
+                {
+                    throw std::invalid_argument{"Not exist"};
+                }
                 if (pointer_to_node != nullptr)
                 {
 
@@ -110,11 +130,46 @@ namespace ariel
             bool operator!=(const iterator &rhs) const { return pointer_to_node != rhs.pointer_to_node; }
         };
         iterator begin_level_order() { return iterator(level_order_flag, root); }
-        iterator end_level_order() { return iterator(nullptr); }
-        iterator begin_preorder() { return iterator(preorder_flag, root); }
-        iterator end_preorder() { return iterator(nullptr); }
-        iterator begin_reverse_order() { return iterator(level_order_reverse_flag, root); }
-        iterator reverse_order() { return iterator(nullptr); }
+        iterator end_level_order()
+        {
+            if (root == nullptr)
+            {
+                throw std::invalid_argument{"Not exist"};
+            }
+            return iterator(nullptr);
+        }
+        iterator begin_preorder()
+        {
+            if (root == nullptr)
+            {
+                throw std::invalid_argument{"Not exist"};
+            }
+            return iterator(preorder_flag, root);
+        }
+        iterator end_preorder()
+        {
+            if (root == nullptr)
+            {
+                throw std::invalid_argument{"Not exist"};
+            }
+            return iterator(nullptr);
+        }
+        iterator begin_reverse_order()
+        {
+            if (root == nullptr)
+            {
+                throw std::invalid_argument{"Not exist"};
+            }
+            return iterator(level_order_reverse_flag, root);
+        }
+        iterator reverse_order()
+        {
+            if (root == nullptr)
+            {
+                throw std::invalid_argument{"Not exist"};
+            }
+            return iterator(nullptr);
+        }
         iterator begin() { return iterator(level_order_flag, root); }
         iterator end() { return iterator(nullptr); }
     };
