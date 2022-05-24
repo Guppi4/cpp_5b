@@ -20,37 +20,53 @@ namespace ariel
         {
             string value;
             vector<TNode *> subs;
-            TNode(string val) : value(val) {}
+            TNode(string val) : value(std::move(val)) {}
         };
         TNode *root;
 
-    public:
+    private:
         int sizeofTree;
         string root_name;
-        OrgChart() : root(NULL), sizeofTree(0), root_name("") {}
+
+    public:
+        OrgChart(const OrgChart &a)
+        {
+            root = a.root;
+            sizeofTree = a.sizeofTree;
+        }
+        OrgChart() : root(NULL), sizeofTree(0) {}
         ~OrgChart()
         {
             delet_Orgchart(root);
         }
+        OrgChart(OrgChart &&other) noexcept
+            : root(NULL), sizeofTree(0) {}
+        OrgChart &operator=(OrgChart &&m)noexcept
+        {
+            if (&m != this)
+            {
+            }
+            return *this;
+        }
+        OrgChart &operator=(const OrgChart &m);
         vector<TNode *> it_preorder();
         TNode *find_root(const string &m);
         void delet_Orgchart(TNode *root)
         {
-           OrgChart *organization=this;
+
             if (root == nullptr)
             {
                 return;
             }
-            vector<TNode*>p=it_preorder();
-             for (vector<TNode*>::iterator it = p.begin() ; it != p.end(); ++it){
+            vector<TNode *> p = it_preorder();
+            for (vector<TNode *>::iterator it = p.begin(); it != p.end(); ++it)
+            {
                 delete *it;
-             
-             }
-            root=nullptr;
-            
+            }
+            root = nullptr;
         }
         OrgChart &add_root(const string &root);
-        OrgChart &add_sub(const  string &root, string sub);
+        OrgChart &add_sub(const string &root, string sub);
         string printNTree_help(TNode *x, vector<bool> flag, int depth, bool isLast);
         friend ostream &operator<<(ostream &out, OrgChart &p)
         {
@@ -171,6 +187,6 @@ namespace ariel
             return iterator(nullptr);
         }
         iterator begin() { return iterator(level_order_flag, root); }
-        iterator end() { return iterator(nullptr); }
+        static iterator end() { return iterator(nullptr); }
     };
 }

@@ -7,13 +7,21 @@
 using namespace std;
 using namespace ariel;
 
-
 vector<string>::iterator return_vec() // return vector of iterator
 {
     vector<string>::iterator vec;
     return vec;
 }
 
+OrgChart &OrgChart::operator=(const OrgChart &m)
+{
+     if (&m != this) {
+       
+
+       
+    }
+    return *this;
+}
 OrgChart &OrgChart::add_root(const string &root)
 {
     // his->sizeofTree++;

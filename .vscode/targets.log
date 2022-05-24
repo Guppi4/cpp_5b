@@ -12,56 +12,31 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
  
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
- 
-# Make data base, printed on Tue May 24 18:05:55 2022
- 
+# Make data base, printed on Tue May 24 21:43:58 2022
 
 # Variables
- 
 
- 
 # environment
- 
 GDK_BACKEND = x11
- 
 # environment
- 
 LC_ALL = C
- 
 # environment
- 
 GNOME_SHELL_SESSION_MODE = ubuntu
- 
 # environment
- 
 SSH_AGENT_LAUNCHER = gnome-keyring
- 
 # environment
- 
 SNAP_INSTANCE_KEY = 
- 
 # environment
- 
 GJS_DEBUG_OUTPUT = stderr
- 
 # environment
- 
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-caaac554-bcb2-444d-a2ed-5b6a283bfdef.sock
- 
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-779bb741-61e4-432b-b867-ff0455a74a81.sock
 # environment
- 
 VSCODE_CWD = /home/kirill
- 
 # default
- 
 MAKE_COMMAND := make
- 
 # environment
- 
 QT_ACCESSIBILITY = 1
- 
 # makefile (from 'Makefile', line 10)
 TIDY_FLAGS = -extra-arg=-std=$(CXXVERSION) -checks=bugprone-*,clang-analyzer-*,cppcoreguidelines-*,performance-*,portability-*,readability-*,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-cppcoreguidelines-owning-memory --warnings-as-errors=*
 # automatic
@@ -93,7 +68,7 @@ VSCODE_CODE_CACHE_PATH = /home/kirill/.config/Code/CachedData/c3511e6c69bb39013c
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.5S17L1
+XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.W69MM1
 # default
 .LOADED := 
 # default
@@ -135,7 +110,7 @@ SNAP_REEXEC =
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 2479
+VSCODE_PID = 2437
 # environment
 XDG_SESSION_TYPE = wayland
 # automatic
@@ -143,7 +118,7 @@ XDG_SESSION_TYPE = wayland
 # environment
 BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
 # environment
-SESSION_MANAGER = local/kirill-VirtualBox:@/tmp/.ICE-unix/1525,unix/kirill-VirtualBox:/tmp/.ICE-unix/1525
+SESSION_MANAGER = local/kirill-VirtualBox:@/tmp/.ICE-unix/1526,unix/kirill-VirtualBox:/tmp/.ICE-unix/1526
 # automatic
 *F = $(notdir $*)
 # environment
@@ -191,7 +166,7 @@ SNAP_USER_COMMON = /home/kirill/snap/code/common
 # environment
 SNAP = /snap/code/97
 # environment
-INVOCATION_ID = 04460de82ed84f33910008d3269cdf35
+INVOCATION_ID = 398279ead1234e67aedfc0397df7440a
 # environment
 SNAP_REVISION = 97
 # environment
@@ -243,9 +218,9 @@ SNAP_DATA = /var/snap/code/97
 # environment
 SNAP_CONTEXT = VYapbnRLuMpWByPxPLxm_RIx4Dbgt1U1ctIMcCm7dY54cgKISHtT
 # environment
-MANAGERPID = 1405
+MANAGERPID = 1389
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 2436
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2391
 # environment
 _ = /snap/code/97/usr/share/code/code
 # environment
@@ -253,7 +228,7 @@ XDG_RUNTIME_DIR = /run/user/1000
 # environment
 GDK_PIXBUF_MODULE_FILE = /home/kirill/snap/code/common/.cache/gdk-pixbuf-loaders.cache
 # environment
-JOURNAL_STREAM = 8:23739
+JOURNAL_STREAM = 8:23863
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -315,10 +290,13 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 
 # Directories
 
-# . (device 2051, inode 1863890): 12 files, no impossibilities.
+ 
+# . (device 2051, inode 1863890): 20 files, no impossibilities.
+ 
 # sources (device 2051, inode 268412): 5 files, no impossibilities.
+ 
 
-# 17 files, no impossibilities in 2 directories.
+# 25 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
@@ -329,7 +307,6 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 objects/%.o: sources/%.cpp sources/OrgChart.hpp
 #  recipe to execute (from 'Makefile', line 26):
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
- 
 
 # 2 implicit rules, 0 (0.0%) terminal.
 # Files
@@ -450,9 +427,9 @@ TestRunner.o:
 # strcache buffers: 1 (0) / strings = 37 / storage = 391 B / avg = 10 B
 # current buf: size = 8162 B / used = 391 B / count = 37 / avg = 10 B
 
-# strcache performance: lookups = 56 / hit rate = 33%
+# strcache performance: lookups = 64 / hit rate = 42%
 # hash-table stats:
-# Load=37/8192=0%, Rehash=0, Collisions=0/56=0%
-# Finished Make data base on Tue May 24 18:05:55 2022
+# Load=37/8192=0%, Rehash=0, Collisions=0/64=0%
+# Finished Make data base on Tue May 24 21:43:58 2022
 
  
