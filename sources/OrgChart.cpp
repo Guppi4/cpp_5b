@@ -9,17 +9,16 @@
 using namespace std;
 using namespace ariel;
 
-
 vector<string>::iterator return_vec() // return vector of iterator
 {
     vector<string>::iterator vec;
     return vec;
 }
 
-OrgChart &OrgChart::add_root(string root)
+OrgChart &OrgChart::add_root(const string &root)
 {
     // his->sizeofTree++;
-    if (!this->root)
+    if (this->root == nullptr)
     {
         this->sizeofTree++;
         this->root = new TNode(root);
@@ -30,7 +29,7 @@ OrgChart &OrgChart::add_root(string root)
     return *this;
 }
 
-OrgChart &OrgChart::add_sub(string root, string sub)
+OrgChart &OrgChart::add_sub(const string &root, string sub)
 {
 
     TNode *f = find_root(root);
@@ -41,12 +40,11 @@ OrgChart &OrgChart::add_sub(string root, string sub)
     }
     this->sizeofTree++;
     // cout << this->root->value << endl;
-    TNode *s = new TNode(sub);
+    TNode *s = new TNode(std::move(sub));
     // cout <<s->value << endl;
     f->subs.push_back(s);
     return *this;
 }
-
 
 OrgChart::TNode *OrgChart::getroot()
 {
@@ -55,13 +53,14 @@ OrgChart::TNode *OrgChart::getroot()
 vector<OrgChart::TNode *> OrgChart::it_preorder()
 {
     stack<TNode *> Stack;
-   
+
     vector<TNode *> Preorders_nodes; // visited nodes
-   if(getroot()==nullptr){
-     throw std::invalid_argument{"Not exist"};
-   }
+    if (getroot() == nullptr)
+    {
+        throw std::invalid_argument{"Not exist"};
+    }
     Stack.push(getroot());
-    
+
     // cout << this->sizeofTree << endl;
     while (!Stack.empty())
     {
@@ -80,91 +79,95 @@ vector<OrgChart::TNode *> OrgChart::it_preorder()
     }
     return Preorders_nodes;
 }
-OrgChart::TNode *OrgChart::find_root(string m)
+OrgChart::TNode *OrgChart::find_root(const string &m)
 {
 
     vector<TNode *> iter = it_preorder();
 
     TNode *t = NULL;
-    for (auto i : iter)
+    for (auto *i : iter)
     {
 
         if (m == i->value)
         {
             TNode *t = i;
 
-            return i;
+            return t;
         };
     }
 
     return t;
 }
-string  OrgChart::printNTree()
+string OrgChart::printNTree()
 {
     TNode *x = this->root;
     unsigned long size = (unsigned long)this->sizeofTree;
     vector<bool> flag(size, true);
-    
-  return printNTree_help(x ,flag, 0, false);
+
+    return printNTree_help(x, flag, 0, false);
 }
 string OrgChart::printNTree_help(TNode *x, vector<bool> flag, int depth = 0, bool isLast = false)
 
 {
     //
     if (x == NULL)
+    {
         return "";
+    }
 
     // Loop to print
-//this->root_name="";
+    // this->root_name="";
     for (size_t i = 1; i < depth; ++i)
     {
 
-        if (flag[i] == true)
+        if (flag[i])
         {
-            this->root_name+= "| ";
-                 this->root_name+=" ";
-                  this->root_name+= " ";
-                 this->root_name+= " ";
+            this->root_name += "| ";
+            this->root_name += " ";
+            this->root_name += " ";
+            this->root_name += " ";
         }
 
         else
         {
-             this->root_name+= " ";
-                 this->root_name+=" ";
-                  this->root_name+=" ";
-                 this->root_name+= " ";
+            this->root_name += " ";
+            this->root_name += " ";
+            this->root_name += " ";
+            this->root_name += " ";
         }
     }
 
-    if (depth == 0){
-        this->root_name+=x->value ; 
-        this->root_name+= '\n';
+    if (depth == 0)
+    {
+        this->root_name += x->value;
+        this->root_name += '\n';
     }
     else if (isLast)
     {
-         this->root_name+= "+--- " ; 
-          this->root_name+=x->value  ;
-           this->root_name+='\n';
+        this->root_name += "*---> ";
+        this->root_name += x->value;
+        this->root_name += '\n';
 
         flag[(size_t)depth] = false;
     }
     else
     {
-        this->root_name+= "+--- " ; 
-          this->root_name+=x->value  ; 
-          this->root_name+= '\n';
+        this->root_name += "*---> ";
+        this->root_name += x->value;
+        this->root_name += '\n';
     }
 
     int it = 0;
     for (auto i = x->subs.begin(); i != x->subs.end(); ++i, ++it)
+    {
+        this->root_name = printNTree_help(*i, flag, depth + 1, it == (x->subs.size()) - 1);
+    }
 
-        // recursive call
+    // recursive call
 
-        
-     this->root_name=printNTree_help(*i,flag, depth + 1, it == (x->subs.size()) - 1);
     flag[(size_t)depth] = true;
 
-  return this->root_name;
+    return this->root_name;
 }
 void OrgChart::iterator::Preoder(TNode *root)
 {
@@ -196,34 +199,36 @@ void OrgChart::iterator::level_order(TNode *root)
 {
     // cout <<"Priv"<<endl;
     vector<vector<TNode *>> ans;
-    if (!root)
+    if (root == nullptr)
     {
         throw runtime_error("Null");
     }
 
-    queue<TNode *> main_queue;
+    queue<TNode *> queue;
 
-    main_queue.push(root);
+    queue.push(root);
 
     vector<TNode *> temp;
 
-    while (!main_queue.empty())
+    while (!queue.empty())
     {
 
-        int n = main_queue.size();
+        size_t n = queue.size();
 
         for (size_t i = 0; i < n; i++)
         {
-            TNode *cur = main_queue.front();
-            main_queue.pop();
+            TNode *cur = queue.front();
+            queue.pop();
             temp.push_back(cur);
-            for (auto u : cur->subs)
-                main_queue.push(u);
+            for (auto *u : cur->subs)
+            {
+                queue.push(u);
+            }
         }
         ans.push_back(temp);
         temp.clear();
     }
-    for (auto v : ans)
+    for (const auto &v : ans)
     {
         for (TNode *x : v)
         {
@@ -240,69 +245,74 @@ void OrgChart::iterator::level_order_reverse(TNode *root)
 {
     // cout <<"Priv"<<endl;
     vector<vector<TNode *>> ans;
-    if (!root)
+    if (root == nullptr)
     {
         throw runtime_error("Null");
     }
 
-    queue<TNode *> main_queue;
+    queue<TNode *> mqueue;
 
-    main_queue.push(root);
+    mqueue.push(root);
 
     vector<TNode *> temp;
 
-    while (!main_queue.empty())
+    while (!mqueue.empty())
     {
 
-        int n = main_queue.size();
+        size_t n = mqueue.size();
 
         for (size_t i = 0; i < n; i++)
         {
-            TNode *cur = main_queue.front();
-            main_queue.pop();
+            TNode *cur = mqueue.front();
+            
+            mqueue.pop();
+            
             temp.push_back(cur);
-            for (auto u : cur->subs)
-                main_queue.push(u);
+           
+            for (auto *u : cur->subs)
+            {
+                mqueue.push(u);
+            }
         }
         ans.push_back(temp);
         temp.clear();
     }
-  
-    stack< queue<TNode *>> stack;
-      
-    for (auto v : ans)
+
+    stack<queue<TNode *>> stack;
+
+    for (const auto &v : ans)
     {
-         queue<TNode *> y;
+        queue<TNode *> y;
         for (TNode *x : v)
         {
-       
-           y.push(x);
+
+            y.push(x);
             // cout << x->value << " ";
         }
-      //cout<<y.size()<<endl;
-       stack.push(y);
+        // cout<<y.size()<<endl;
+        stack.push(y);
         // cout << endl;
     }
-     //cout << "fdghg"<<endl;
-   
+    // cout << "fdghg"<<endl;
+
     while (!stack.empty())
     {
-      
-     queue<TNode *> y = stack.top();
-          //cout<<y.size()<<endl;
-       // stack.pop();
-       // cout << "fdghg"<<endl;
-       
+
+        queue<TNode *> y = stack.top();
+        // cout<<y.size()<<endl;
+        // stack.pop();
+        // cout << "fdghg"<<endl;
+
         while (!y.empty())
-    {
-       
-        TNode *i= y.front();
-        //cout<<i->value<<endl;
-        this->tq.push( i);
-        y.pop();
-    }
-         stack.pop();
-        //this->tq.push(n);
+        {
+
+            TNode *i = y.front();
+            // cout<<i->value<<endl;
+            this->tq.push(i);
+            y.pop();
+        }
+        stack.pop();
+        // this->tq.push(n);
     }
 
     this->pointer_to_node = this->tq.front();

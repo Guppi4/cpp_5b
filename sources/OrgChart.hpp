@@ -33,7 +33,7 @@ namespace ariel
             delet_Orgchart(root);
         }
         vector<TNode *> it_preorder();
-        TNode *find_root(string m);
+        TNode *find_root(const string &m);
         void delet_Orgchart(TNode *root)
         {
            OrgChart *organization=this;
@@ -49,8 +49,8 @@ namespace ariel
             root=nullptr;
             
         }
-        OrgChart &add_root(const string root);
-        OrgChart &add_sub(string root, string sub);
+        OrgChart &add_root(const string &root);
+        OrgChart &add_sub(const  string &root, string sub);
         string printNTree_help(TNode *x, vector<bool> flag, int depth, bool isLast);
         friend ostream &operator<<(ostream &out, OrgChart &p)
         {
