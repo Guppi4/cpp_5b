@@ -15,32 +15,53 @@ make: *** No rule to make target 'all'.  Stop.
  
 
  
-# Make data base, printed on Tue May 24 16:20:15 2022
+# Make data base, printed on Tue May 24 18:05:55 2022
  
 
 # Variables
  
 
+ 
 # environment
+ 
 GDK_BACKEND = x11
+ 
 # environment
+ 
 LC_ALL = C
+ 
 # environment
+ 
 GNOME_SHELL_SESSION_MODE = ubuntu
+ 
 # environment
+ 
 SSH_AGENT_LAUNCHER = gnome-keyring
+ 
 # environment
+ 
 SNAP_INSTANCE_KEY = 
+ 
 # environment
+ 
 GJS_DEBUG_OUTPUT = stderr
+ 
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-ae4e0697-e1ab-4124-92d2-b22e9e1840a1.sock
+ 
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-caaac554-bcb2-444d-a2ed-5b6a283bfdef.sock
+ 
 # environment
+ 
 VSCODE_CWD = /home/kirill
+ 
 # default
+ 
 MAKE_COMMAND := make
+ 
 # environment
+ 
 QT_ACCESSIBILITY = 1
+ 
 # makefile (from 'Makefile', line 10)
 TIDY_FLAGS = -extra-arg=-std=$(CXXVERSION) -checks=bugprone-*,clang-analyzer-*,cppcoreguidelines-*,performance-*,portability-*,readability-*,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-cppcoreguidelines-owning-memory --warnings-as-errors=*
 # automatic
@@ -72,7 +93,7 @@ VSCODE_CODE_CACHE_PATH = /home/kirill/.config/Code/CachedData/c3511e6c69bb39013c
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.26EMM1
+XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.5S17L1
 # default
 .LOADED := 
 # default
@@ -114,7 +135,7 @@ SNAP_REEXEC =
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 2724
+VSCODE_PID = 2479
 # environment
 XDG_SESSION_TYPE = wayland
 # automatic
@@ -122,7 +143,7 @@ XDG_SESSION_TYPE = wayland
 # environment
 BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
 # environment
-SESSION_MANAGER = local/kirill-VirtualBox:@/tmp/.ICE-unix/1790,unix/kirill-VirtualBox:/tmp/.ICE-unix/1790
+SESSION_MANAGER = local/kirill-VirtualBox:@/tmp/.ICE-unix/1525,unix/kirill-VirtualBox:/tmp/.ICE-unix/1525
 # automatic
 *F = $(notdir $*)
 # environment
@@ -170,10 +191,8 @@ SNAP_USER_COMMON = /home/kirill/snap/code/common
 # environment
 SNAP = /snap/code/97
 # environment
-INVOCATION_ID = 419f18b537904c649db1b79daa387551
- 
+INVOCATION_ID = 04460de82ed84f33910008d3269cdf35
 # environment
- 
 SNAP_REVISION = 97
 # environment
 SNAP_REAL_HOME = /home/kirill
@@ -224,9 +243,9 @@ SNAP_DATA = /var/snap/code/97
 # environment
 SNAP_CONTEXT = VYapbnRLuMpWByPxPLxm_RIx4Dbgt1U1ctIMcCm7dY54cgKISHtT
 # environment
-MANAGERPID = 1653
+MANAGERPID = 1405
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 2681
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2436
 # environment
 _ = /snap/code/97/usr/share/code/code
 # environment
@@ -234,7 +253,7 @@ XDG_RUNTIME_DIR = /run/user/1000
 # environment
 GDK_PIXBUF_MODULE_FILE = /home/kirill/snap/code/common/.cache/gdk-pixbuf-loaders.cache
 # environment
-JOURNAL_STREAM = 8:25664
+JOURNAL_STREAM = 8:23739
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -296,21 +315,21 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 
 # Directories
 
-# . (device 2051, inode 1863890): 13 files, no impossibilities.
+# . (device 2051, inode 1863890): 12 files, no impossibilities.
 # sources (device 2051, inode 268412): 5 files, no impossibilities.
 
-# 18 files, no impossibilities in 2 directories.
+# 17 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 %.o: %.cpp sources/OrgChart.hpp
 #  recipe to execute (from 'Makefile', line 23):
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
- 
 
 objects/%.o: sources/%.cpp sources/OrgChart.hpp
 #  recipe to execute (from 'Makefile', line 26):
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
+ 
 
 # 2 implicit rules, 0 (0.0%) terminal.
 # Files
@@ -331,7 +350,7 @@ StudentTest2.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-21 19:59:54
+#  Last modified 2022-05-24 18:02:20.733170831
 #  File has been updated.
 #  Successfully updated.
 
@@ -340,7 +359,7 @@ tidy:
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 41):
-	clang-tidy $(SOURCES) $(TIDY_FLAGS) --
+	clang-tidy $(SOURCES) $(HEADERS) $(TIDY_FLAGS) --
 
 clean:
 #  Implicit rule search has not been done.
@@ -396,7 +415,6 @@ all:
 #  File has not been updated.
 
 run: test
- 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -429,12 +447,12 @@ TestRunner.o:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 38 / storage = 400 B / avg = 10 B
-# current buf: size = 8162 B / used = 400 B / count = 38 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 37 / storage = 391 B / avg = 10 B
+# current buf: size = 8162 B / used = 391 B / count = 37 / avg = 10 B
 
-# strcache performance: lookups = 57 / hit rate = 33%
+# strcache performance: lookups = 56 / hit rate = 33%
 # hash-table stats:
-# Load=38/8192=0%, Rehash=0, Collisions=0/57=0%
-# Finished Make data base on Tue May 24 16:20:15 2022
+# Load=37/8192=0%, Rehash=0, Collisions=0/56=0%
+# Finished Make data base on Tue May 24 18:05:55 2022
 
  

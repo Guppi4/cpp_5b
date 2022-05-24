@@ -2,12 +2,11 @@
 #include <iterator>
 #include <iostream>
 #include <vector>
-#include <fstream>
-#include <sstream>
 #include <stdexcept>
 #include <bits/stdc++.h>
 using namespace std;
 using namespace ariel;
+
 
 vector<string>::iterator return_vec() // return vector of iterator
 {
@@ -264,11 +263,11 @@ void OrgChart::iterator::level_order_reverse(TNode *root)
         for (size_t i = 0; i < n; i++)
         {
             TNode *cur = mqueue.front();
-            
+
             mqueue.pop();
-            
+
             temp.push_back(cur);
-           
+
             for (auto *u : cur->subs)
             {
                 mqueue.push(u);

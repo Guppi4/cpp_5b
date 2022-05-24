@@ -1,7 +1,8 @@
-make --dry-run --always-make --keep-going --print-directory
+make --dry-run --keep-going --print-directory
 make: Entering directory '/home/kirill/Desktop/CPP/cpp_5b'
 clang++-9 -std=c++2a -Werror -Wsign-conversion -Isources --compile TestRunner.cpp -o TestRunner.o
 curl https://raw.githubusercontent.com/renanarimon/cpp_5b_test/master/Test.cpp > StudentTest1.cpp
+ 
 clang++-9 -std=c++2a -Werror -Wsign-conversion -Isources --compile StudentTest1.cpp -o StudentTest1.o
 curl https://raw.githubusercontent.com/ShauliTaragin/Orgchart-A/main/Test.cpp > StudentTest2.cpp
 clang++-9 -std=c++2a -Werror -Wsign-conversion -Isources --compile StudentTest2.cpp -o StudentTest2.o
